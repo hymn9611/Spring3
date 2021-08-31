@@ -5,4 +5,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		
+	<!-- 객체 생성, 주입 -->
+	<!-- DBConnector db = new CBConnector() -->
+	<bean class="com.iu.s1.util.DBConnector" id="dBConnector"></bean>
 </beans>

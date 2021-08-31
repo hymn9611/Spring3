@@ -7,17 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.iu.s1.util.DBConnector;
 
-@Service
+
 public class BankBookService {
 	
 	private BankBookDAO bankBookDAO;
 	
 	
-	public BankBookService() {
-		
-	}
-	
-	@Autowired
 	public void setBankBookDAO(BankBookDAO bankBookDAO) {
 		this.bankBookDAO = bankBookDAO;
 	}

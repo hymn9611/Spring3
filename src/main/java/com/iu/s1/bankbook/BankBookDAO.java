@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.iu.s1.util.DBConnector;
 
-@Repository
+
 public class BankBookDAO {
 	
 	private DBConnector dbConnector;
@@ -20,7 +20,7 @@ public class BankBookDAO {
 	public BankBookDAO() {
 	}
 	
-	@Autowired
+	
 	public BankBookDAO(DBConnector dbConnector) {
 		this.dbConnector = dbConnector;
 	}
