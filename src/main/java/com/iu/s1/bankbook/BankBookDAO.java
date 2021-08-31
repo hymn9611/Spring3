@@ -17,11 +17,7 @@ public class BankBookDAO {
 	private DBConnector dbConnector;
 	
 	
-	public BankBookDAO() {
-	}
-	
-	
-	public BankBookDAO(DBConnector dbConnector) {
+	public BankBookDAO(DBConnector dbConnector, int num, String name) {
 		this.dbConnector = dbConnector;
 	}
 	

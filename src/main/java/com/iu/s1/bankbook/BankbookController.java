@@ -19,11 +19,9 @@ import com.iu.s1.util.DBConnector;
 public class BankbookController {
 	//pojo(plain old java object)
 	
+	@Autowired
 	private BankBookService bankbookService;
 	
-	@Autowired
-	public BankbookController() {
-	}
 	
 	@RequestMapping(value="bankbookList.do", method=RequestMethod.GET)
 	public ModelAndView list(ModelAndView mv) {
@@ -32,7 +30,6 @@ public class BankbookController {
 		System.out.println("bankbook list");
 		
 		//ModelAndView mv = new ModelAndView();
-		mv = new ModelAndView();
 		mv.addObject("list", ar);
 		mv.setViewName("bankbook/bankbookList");
 		
