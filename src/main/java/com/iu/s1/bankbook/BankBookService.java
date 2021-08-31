@@ -13,10 +13,6 @@ public class BankBookService {
 	private BankBookDAO bankBookDAO;
 	
 	
-	public BankBookService() {
-		
-	}
-	
 	@Autowired
 	public void setBankBookDAO(BankBookDAO bankBookDAO) {
 		this.bankBookDAO = bankBookDAO;
