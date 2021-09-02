@@ -5,6 +5,10 @@
   
   <mapper namespace="com.iu.s1.bankbook.BankBookDAO">
   	
+  	<delete id="setDelete" parameterType="java.lang.Long">
+  		DELETE bankbook WHERE booknumber=#{bookNumber}
+  	</delete>
+  	
   	<insert id="setInsert" parameterType="com.iu.s1.bankbook.BankBookDTO">
   		INSERT INTO BANKBOOK (bookNumber, bookName, bookRate, bookSale) 
   		values (bankbook_seq.nextval, #{bookName}, #{bookRate}, #{bookSale})

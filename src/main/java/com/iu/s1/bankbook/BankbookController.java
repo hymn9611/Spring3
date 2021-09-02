@@ -33,18 +33,29 @@ public class BankbookController {
 	
 	@RequestMapping("bankbookSelect")
 	public void select(BankBookDTO bankBookDTO, Model model) {
+		System.out.println("select");
+		System.out.println(bankBookDTO.getBookNumber());
 		bankBookDTO = bankBookService.getSelect(bankBookDTO);
-		model.addAttribute("dtov", bankBookDTO);
+		System.out.println("Name : " + bankBookDTO.getBookName());
+		model.addAttribute("dto", bankBookDTO);
 		
 	}
 	
-	@RequestMapping("bankbookInsert.do")
+	@RequestMapping(value="bankbookInsert", method=RequestMethod.GET)
+	public void insert() {}
+	
+	@RequestMapping(value="bankbookInsert", method=RequestMethod.POST)
 	public String insert(BankBookDTO bankBookDTO) {
-		//public void insert(String bookName, Double bookRate, Integer bookSale)
-		//파라미터를 get하고, DTO에 set하는 과정을 생략할 수 있게 되었다.
-		System.out.println(bankBookDTO.getBookName());
-		System.out.println("insert");
-		return "redirect : ../";
+		int result = bankBookService.setInsert(bankBookDTO);
 		
+		return "redirect:./bankbookList";
+		
+	}
+	
+	@RequestMapping("bankbookDelete")
+	public String delete(Long bookNumber) {
+		int result = bankBookService.setDelete(bookNumber);
+		
+		return "redirect:./bankbookList";
 	}
 }
