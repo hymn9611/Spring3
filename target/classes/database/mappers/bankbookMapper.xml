@@ -5,6 +5,35 @@
   
   <mapper namespace="com.iu.s1.bankbook.BankBookDAO">
   	
+  	<select id="getCount" resultType="java.lang.Long" parameterType="com.iu.s1.util.Pager">
+  		SELECT COUNT(booknumber) FROM bankbook
+  		WHERE 
+         		 
+         		 <choose>
+         		 	<when test="kind == 'num'">
+         		 		bookNumber
+         		 	</when>
+         		 	
+         		 	<when test="kind == 'name'">
+         		 		bookName
+         		 	</when>
+         		 	
+         		 	<otherwise>
+         		 		bookRate
+         		 	</otherwise>
+         		 
+         		 </choose>
+         		 
+         		 
+         		 LIKE '%' || #{search} || '%'
+         		 ORDER BY BOOKNUMBER desc
+  	</select>
+  	
+  	<update id="setUpdate" parameterType="com.iu.s1.bankbook.BankBookDTO">
+  		UPDATE bankbook SET bookName=#{bookName}, bookRate=#{bookRate}, bookSale=#{bookSale}
+  		WHERE bookNumber=#{bookNumber}
+  	</update>
+  	
   	<delete id="setDelete" parameterType="java.lang.Long">
   		DELETE bankbook WHERE booknumber=#{bookNumber}
   	</delete>
@@ -14,8 +43,35 @@
   		values (bankbook_seq.nextval, #{bookName}, #{bookRate}, #{bookSale})
   	</insert>
   	
-  	<select id="getList" resultType="com.iu.s1.bankbook.BankBookDTO">
-  		SELECT * FROM BANKBOOK
+  	<select id="getList" resultType="com.iu.s1.bankbook.BankBookDTO" parameterType="com.iu.s1.util.Pager">
+  		SELECT * FROM
+    		(SELECT rownum R, BK.* FROM
+        		(SELECT * 
+         		 FROM BANKBOOK 
+         		 WHERE 
+         		 
+         		 <choose>
+         		 	<when test="kind == 'num'">
+         		 		bookNumber
+         		 	</when>
+         		 	
+         		 	<when test="kind == 'name'">
+         		 		bookName
+         		 	</when>
+         		 	
+         		 	<otherwise>
+         		 		bookRate
+         		 	</otherwise>
+         		 
+         		 </choose>
+         		 
+         		 
+         		 LIKE '%' || #{search} || '%'
+         		 ORDER BY BOOKNUMBER desc
+         		)
+       		 BK
+    		)
+		WHERE R between #{startRow} and #{lastRow}
   	</select>
   	
   	<select id="getSelect" parameterType="com.iu.s1.bankbook.BankBookDTO" resultType="com.iu.s1.bankbook.BankBookDTO">
